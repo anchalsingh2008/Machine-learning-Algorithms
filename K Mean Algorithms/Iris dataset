@@ -1,0 +1,20 @@
+import pandas as pd
+from sklearn.cluster import KMeans
+from sklearn import metrics
+import matplotlib.pyplot as plt
+
+
+df=pd.read_csv("C:/Users/Anchal Singh/Desktop/Iris.csv")
+df
+
+t=df.iloc[::,0:4]
+t
+
+k=3
+kmeans_model=KMeans(n_clusters=k)
+kmeans_model.fit(t)
+
+
+
+plt.scatter(t.SepalLengthCm,t.PetalLengthCm,c=kmeans_model.labels_)
+
