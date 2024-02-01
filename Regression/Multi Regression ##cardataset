@@ -1,0 +1,36 @@
+import pandas as pd
+
+df=pd.read_csv("C:/Users/Anchal Singh/Desktop/cardata.csv")
+df
+
+df['Owner'].value_counts()
+
+
+df2=df.drop_duplicates()
+df2
+
+df2.corr()
+
+df2.isnull().sum
+
+df2.isnull().sum()
+
+x=df2[['Year','Present_Price','Kms_Driven']]
+y=df2['Selling_Price']
+
+from sklearn import linear_model
+
+regr=linear_model.LinearRegression()
+regr.fit(x,y)
+
+predicted=regr.predict([[2017,9.85,6900]])
+predicted
+
+print(predicted)
+
+predicted2=regr .predict(x)
+predicted2
+
+from sklearn.metrics import r2_score
+print(r2_score(y,predicted2))
+
