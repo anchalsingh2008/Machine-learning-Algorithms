@@ -1,0 +1,55 @@
+from sklearn.datasets import load_iris
+iris=load_iris()
+iris
+
+t=iris.data
+t.shape
+
+x,y =iris.data[:-1,:], iris.target[:-1]
+x
+
+y
+
+x.shape
+
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3,random_state=0)
+y_test
+
+x_train.shape
+
+x_test.shape
+
+x_train
+
+from sklearn.linear_model import LogisticRegression
+logistic = LogisticRegression()
+
+logistic.fit(x_train,y_train)
+("C:/Users/Anchal Singh/Desktop/Iris.csv")
+
+y_pred=logistic.predict(x_test)
+y_pred
+
+print(logistic.predict_proba(iris.data[-1:,:]))
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+
+results=confusion_matrix(y_test,y_pred)
+print('confusion matrix')
+print(results)
+print('accuracy score:',accuracy_score(y_test,y_pred))
+
+
+
+import numpy as np
+
+k=np.array([[5.1, 3.5, 1.4, 0.2]])
+k
+
+pred=logistic.predict(k)
+pred
+
+iris['target_names'][pred]
+
