@@ -1,0 +1,21 @@
+import numpy
+x=numpy.array([2,3,4,6,7])
+y=numpy.array([10000,12000,15000,20000,22000])
+x
+
+mymodel= numpy.poly1d(numpy.polyfit(x,y,5))
+
+pred=mymodel(x)
+pred
+
+import matplotlib.pyplot as plt
+plt.scatter(x,y)
+plt.plot(x,pred)
+plt.show()
+
+from sklearn.metrics import r2_score
+print(r2_score(y,pred))
+
+
+
+
