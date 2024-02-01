@@ -1,0 +1,38 @@
+import pandas as pd
+
+df= pd.read_csv("C:/Users/Anchal Singh/Desktop/housing.csv")
+df
+
+t=df.iloc[0:,[0,1,2,3,4,10]]
+t
+
+t2=df.iloc[0:,0:1]
+t2
+
+t2.isnull().sum()
+
+from sklearn.linear_model import LinearRegression
+
+lr=LinearRegression()
+
+lr.fit(t,t2)
+
+s=lr.coef_[0]
+s
+
+intercept=lr.intercept_
+intercept
+
+x=int(input("Enter the area"))
+pred=s*x+intercept
+pred
+
+pred2=lr.predict([[13300000,7420,4,2,3,2]])
+pred2
+
+pred3=lr.predict(t)
+pred3
+
+from sklearn.metrics import r2_score
+print(r2_score(t2,pred3))
+
