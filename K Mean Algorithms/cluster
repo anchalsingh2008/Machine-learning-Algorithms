@@ -1,0 +1,39 @@
+from sklearn.cluster import KMeans
+
+from sklearn import metrics
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+
+x=np.array([2,5,8,1,2,6,3,8])
+y=np.array([3,6,7,4,2,7,4,6])
+
+
+plt.plot()
+plt.xlim([0,20])
+plt.ylim([0,20])
+plt.scatter(x,y)
+plt.show()
+
+X=np.array(list(zip(x,y))).reshape(len(x),2)
+X
+
+colors=['b','g','r']
+markers=['o','v','s']
+
+
+K=3
+
+kmeans_model=KMeans(n_clusters=K).fit(X)
+kmeans_model.labels_
+
+plt.plot()
+for i,l in enumerate(kmeans_model.labels_):
+    plt.plot(x[i],y[i],color=colors[l],marker=markers[l])
+    plt.xlim([0,20])
+    plt.ylim([0,20])
+plt.show()
+
+
+
