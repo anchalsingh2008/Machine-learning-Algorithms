@@ -1,0 +1,38 @@
+import pandas as pd
+data=pd.read_csv("C:/Users/Anchal Singh/Desktop/socal network.csv")
+data
+
+data_x=data.iloc[:,[2,3]].values
+data_y=data.iloc[:,4].values
+
+from sklearn.model_selection import train_test_split
+
+x_train,x_test,y_train,y_test=train_test_split(data_x,data_y,test_size=0.25,random_state=0)
+y_test
+
+from sklearn.preprocessing import StandardScaler
+sc=StandardScaler()
+x_train=sc.fit_transform(x_train)
+x_test=sc.fit_transform(x_test)
+
+from sklearn.ensemble import RandomForestClassifier
+
+cls= RandomForestClassifier(n_estimators=3, criterion ='entropy', random_state=0)
+
+cls.fit(x_train,y_train)
+
+y_pred=cls.predict(x_test)
+y_pred
+
+y_test
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+
+results=confusion_matrix(y_test,y_pred)
+print('confusion matrix')
+print(results)
+print('accuracy score:',accuracy_score(y_test,y_pred))
+
+
+
