@@ -1,0 +1,41 @@
+import numpy as np
+
+x=np.array([[2],[3],[6],[7],[9]])
+
+y=np.array([20000,25000,40000,45000,55000])
+
+
+from sklearn.linear_model import LinearRegression
+
+lr=LinearRegression()
+
+lr.fit(x,y)
+
+LinearRegression(copy_X=True, fit_intercept=True, n_jobs=None, positive=False)
+
+s=lr.coef_[0]
+s
+
+intercept=lr.intercept_
+intercept
+
+#y=mx=c
+
+X=int(input("Enter the exp"))
+pred=s*x+intercept
+pred
+
+pred2=lr.predict(x)
+pred2
+
+pred3=lr.predict(x)
+pred3
+
+import matplotlib.pyplot as plt
+plt.scatter(x,y)
+plt.plot(x,pred3)
+plt.show()
+
+from sklearn.metrics import r2_score
+print(r2_score(y,pred3))
+
