@@ -1,0 +1,60 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+
+data=pd.read_csv("C:/Users/Anchal Singh/Desktop/lone.csv")
+data
+
+data.fillna(0, inplace=True)
+
+data = pd.get_dummies(data)
+
+real_x=data.iloc[:,[2,3]].values
+real_y=data.iloc[:,4].values
+
+training_x,test_x,training_y,test_y=train_test_split(real_x,real_y,test_size=0.25,random_state=0)
+s_c=StandardScaler()
+
+s_c=StandardScaler()
+training_x=s_c.fit_transform(training_x)
+test_x=s_c.transform(test_x)
+
+from sklearn.neighbors import KNeighborsClassifier
+cls = KNeighborsClassifier(n_neighbors=5)
+cls.fit(training_x,training_y)
+
+y_pred=cls.predict(test_x)
+y_pred
+
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+
+results=confusion_matrix(test_y,y_pred)
+print('confusion matrix')
+print(results)
+print('accuracy score:',accuracy_score(test_y,y_pred))
+
+
+
+import numpy as np
+t=np.array([[33,10000]])
+
+pred=cls.predict(t)
+pred
+
+from matplotlib.colors import ListedColormap
+x_set,y_test=training_x,training_y
+
+from matplotlib.colors import ListedColormap
+x_set,y_set=test_x,test_y
+x1,x2 = np.meshgrid(np.arange(start=x_set[:,0].min()-1,stop=x_set[:,0].max()+1,step=0.01),
+                    np.arange(start=x_set[:,1].min()-1,stop=x_set[:,1].max()+1,step=0.01))
+plt.contourf(x1,x2,cls.predict(np.array([x1.ravel(),x2.ravel()]).T).reshape(x1.shape),alpha=0.75, cmap=ListedColormap(("red","green")))
+plt.xlim(x1.min(),x1.max())
+plt.ylim(x2.min(),x2.max())
+for i,j in enumerate(np.unique(y_set)):
+    plt.scatter( x_set[y_set==j,0],x_set[y_set==j,1],c=ListedColormap(("red","green"))(i),label=j )
+plt.show()
+
